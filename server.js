@@ -27,13 +27,21 @@ http.createServer(function(req, res) {
       }
     break;
   // GET ~
-  
+
   case 'POST':
     switch(reqPatch) {
       case '/git':
       req.on('data', function(data) {
+        var data = JSON.parse(data);
+        console.log(data);
         var gitHandle = require('./git.js');
-        var gitResp = gitHandle.gitHandle('' + data);
+        var gitResp = null;
+        switch(data.action) {
+          case 'open':
+          gitResp = gitHandle.open(data.patch);
+          break;
+        }
+
         res.writeHead(200);
         res.end(gitResp);
       })

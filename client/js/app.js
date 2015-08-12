@@ -15,14 +15,26 @@ app.controller('mainController', function($http, $scope) {
         $('.add-container button').toggleClass('show-for-sr');
     }
     // git
-    $scope.git = function() {
+    $scope.gitClone = function() {
       var cloneUrl = $('#git-clone').val();
       // console.log(typeof cloneUrl);
         $http.post('/git', cloneUrl)
           .success(function(data) {
             console.log(data);
-          })
+          });
     }
+
+    $scope.gitOpen = function() {
+      var mess = {
+        "action": "open",
+        "patch": $('#git-open-repo').val()
+      };
+        $http.post('/git', mess)
+          .success(function(data) {
+            console.log(data);
+          });
+    }
+
     // git~
     $scope.editToggle = function() {
         editToggler();

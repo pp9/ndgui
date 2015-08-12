@@ -8,9 +8,20 @@ cloneOptions.remoteCallbacks = {
 
 
 // NodeGit.Clone(cloneURL, localPath, cloneOptions);
+var path = "/Users/evgeny/dev/todo/tmp/";
 module.exports = {
-  gitHandle: function(data) {
+  clone: function(data) {
     NodeGit.Clone(data, localPath, cloneOptions);
     return data;
+  },
+  open: function() {
+    // var pathToRepo = require("path").resolve(path);
+    NodeGit.Repository.open("./tmp").then(function (repo) {
+      // console.log(repo)
+       console.log(repo); 
+    })
+    .done(function(err) {
+      // console.log(err)
+    })
   }
 }
